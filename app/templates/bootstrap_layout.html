@@ -31,7 +31,7 @@
     <!-- see: https://jinja.palletsprojects.com/en/2.11.x/tricks/ -->
     <!-- see: https://getbootstrap.com/docs/4.0/components/navbar/ -->
     {% set nav_links = [
-      ('/', 'recommendation_form', 'Drop Down Recommendation Form'),
+      ('/drop_down_form', 'drop_down_recommendation_form', 'Drop Down Recommendation Form'),
       ('/text_recommendation', 'text_recommendation_form', 'Text Recommendation Form')
     ] -%}
     {% set active_page = active_page|default('index') -%}

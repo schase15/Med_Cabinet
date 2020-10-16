@@ -92,8 +92,7 @@ def model_recommender():
     records = parse_records(Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all())
 
 
-    # Return information for database in json format
-    return jsonify(records)
+    return render_template('results.html', data= records)
 
 
 # Model route for a text input 
@@ -138,8 +137,9 @@ def text_model_recommender():
     ]
 
     records = parse_records(Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all())
-    
-    # MILESTONE 02 #> User input list goes through KNN model
+    df_result = pd.DataFrame(data = records)
+    print(df_result.head())
 
-    # return render_template("result_view.html", data=records)
-    return jsonify(records)
+    # return render_template('results.html', data= df_result.to_html())
+    return render_template('results.html', data= records)
+

@@ -90,9 +90,9 @@ def model_recommender():
 
     # Query statement for database - need to update to match our database - changed from Cannabis
     records = parse_records(Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all())
+    df_result = pd.DataFrame(data = records)
 
-
-    return render_template('results.html', data= records)
+    return render_template('results.html', data= df_result.to_html())
 
 
 # Model route for a text input 
@@ -138,8 +138,5 @@ def text_model_recommender():
 
     records = parse_records(Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all())
     df_result = pd.DataFrame(data = records)
-    print(df_result.head())
 
-    # return render_template('results.html', data= df_result.to_html())
-    return render_template('results.html', data= records)
-
+    return render_template('results.html', data= df_result.to_html())

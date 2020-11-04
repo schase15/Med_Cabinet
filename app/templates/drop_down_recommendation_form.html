@@ -8,7 +8,7 @@
     <head>
     <style>
     .two_column {
-      column-count: 2;
+      column-count: 3;
     }
     </style>
     </head>
@@ -20,6 +20,8 @@
         alt="">
     </p>
 
+    <h4>Choose the 'Type', 'Effect' and 'Flavor' you are looking for. </h4>
+
     <div class="two_column">
 
         <p>Choose the 'Type', 'Effect' and 'Flavor' you are looking for. Select as many options as you would like
@@ -29,35 +31,36 @@
         <form action="/strain_output" method="POST">
 
             <fieldset>
-                <legend>Type List</legend>
+                <legend>Type</legend>
                 <select name="type_list" size="3" multiple class="chosen-select" id="type_list">
+                    <option value="hybrid">Hybrid</option>                    
                     <option value="indica">Indica</option>
                     <option value="sativa">Sativa</option>
-                    <option value="hybrid">Hybrid</option>
                 </select>
             </fieldset>
 
             <fieldset>
-                <legend>Effect List</legend>
+                <legend>Effect</legend>
                 <select name="effect_list" size="13" multiple class="chosen-select" id="effect_list">
-                    <option value="happy">Happy</option>
-                    <option value="relaxed">Relaxed</option>
-                    <option value="euphoric">Euphoric</option>
-                    <option value="uplifted">Uplifted</option>
-                    <option value="creative">Creative</option>
-                    <option value="sleepy">Sleepy</option>
-                    <option value="energetic">Energetic</option>
-                    <option value="focused">Focused</option>
-                    <option value="hungry">Hungry</option>
-                    <option value="talkative">Talkative</option>
-                    <option value="tingly">Tingly</option>
-                    <option value="giggly">Giggly</option>
+
                     <option value="aroused">Aroused</option>
+                    <option value="creative">Creative</option>
+                    <option value="energetic">Energetic</option>
+                    <option value="euphoric">Euphoric</option>
+                    <option value="focused">Focused</option>  
+                    <option value="giggly">Giggly</option>                                                                                                                      
+                    <option value="happy">Happy</option>
+                    <option value="hungry">Hungry</option>                    
+                    <option value="relaxed">Relaxed</option>
+                    <option value="sleepy">Sleepy</option>
+                    <option value="talkative">Talkative</option>
+                    <option value="tingly">Tingly</option>                    
+                    <option value="uplifted">Uplifted</option>
                 </select>
             </fieldset>
 
             <fieldset>
-                <legend>Flavor List</legend>
+                <legend>Flavor</legend>
                 <select name="flavor_list" size="47" multiple class="chosen-select" id="flavor_list">
                     <option value="earthy">Earthy</option>
                     <option value="sweet">Sweet</option>

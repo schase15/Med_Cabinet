@@ -5,12 +5,10 @@
 {% block content %}
     <h2>Based on your desired effects, these are the strains we would recommend!</h2>
 
-    <p>
+    <!-- <p>
         Take a look at these 5 profiles. 
         {{data | safe}}
-    </p>
-
-
+    </p> -->
     
     <!-- <table>
         <tr>
@@ -28,5 +26,16 @@
         </tr>
     </table> -->
 
+
+    {% if data %}
+      <ul>
+      {% for strain in data %}
+          <li>{{ strain.strain_description }}</li>
+      {% endfor %}
+      </ul>
+
+    {% else %}
+        <p>Records not found.</p>
+    {% endif %}
 
 {% endblock %}

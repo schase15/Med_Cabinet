@@ -88,11 +88,15 @@ def model_recommender():
         for val in list_strains
     ]
 
-    # Query statement for database - need to update to match our database - changed from Cannabis
-    records = parse_records(Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all())
-    df_result = pd.DataFrame(data = records)
+    # # Query statement for database
+    # records = parse_records(Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all())
+    # df_result = pd.DataFrame(data=records)
 
-    return render_template('results.html', data= df_result.to_html())
+    # return render_template('results.html', data=df_result.to_html())
+
+    # To return just the objects
+    records = Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all()
+    return render_template('results.html', data=records)
 
 
 # Model route for a text input 
@@ -136,11 +140,11 @@ def text_model_recommender():
         for val in list_strains
     ]
 
+    ## To return a populated dataframe
     # records = parse_records(Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all())
     # df_result = pd.DataFrame(data = records)
-
     # return render_template('results.html', data= df_result.to_html())
 
+    # To return just the objects
     records = Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all()
-    # breakpoint()
     return render_template('results.html', data=records)

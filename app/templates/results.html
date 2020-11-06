@@ -3,39 +3,44 @@
 {% extends "bootstrap_layout.html" %}
 
 {% block content %}
+
+    <html>
+    <head>
+    <style>
+    table {
+        border-collapse: separate;
+        border-spacing: 10px 0;
+        }
+        
+        td {
+        padding: 10px 15px;
+        background: #C7F6B6;
+        }
+    </style>
+    </head>
+
     <h2>Based on your desired effects, these are the strains we would recommend!</h2>
 
-    <!-- <p>
-        Take a look at these 5 profiles. 
-        {{data | safe}}
-    </p> -->
-    
-    <!-- <table>
+    <table>
         <tr>
-         <th>About Us!</th>
-         <th>How It Works</th>
+            {% for strain in data %}
+                <th>
+                <li>{{strain.strain_name}}</li>
+                </th>
+            {% endfor %}
         </tr>
+
         <tr>
-         <td>Here at Med Cabinet we believe in the holistic effects that cannabis can provide to everyone.
-            Whether you are new to the world of cannibis or long been an advocate, we are here to help you discover your next favorite strain! 
-            We have a database of over 1,600 different strains. Let us know what you are looking for out of your cannabis 
-            experience and we will search our database to reccommend the top 5 strains that will meet your needs.</td>
-         <td>Pick one of two ways to tell us what you want! If you need some inspiration, select options from a few dropdown menus. If you have
-            a vision of what you want, select the text option to write us a few sentences describing your dream stain. Either way we will 
-            return 5 strain profiles with the strain name, overall rating, type, effects, flavor and a brief description.</td>
+            {% for strain in data %}
+                <td>
+                <li>{{strain.strain_description}}</li>
+                </td>
+            {% endfor %}
         </tr>
-    </table> -->
+
+    </table>
 
 
-    {% if data %}
-      <ul>
-      {% for strain in data %}
-          <li>{{ strain.strain_description }}</li>
-      {% endfor %}
-      </ul>
 
-    {% else %}
-        <p>Records not found.</p>
-    {% endif %}
 
 {% endblock %}

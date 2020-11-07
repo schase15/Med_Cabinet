@@ -7,40 +7,30 @@
     <html>
     <head>
     <style>
-    table {
-        border-collapse: separate;
-        border-spacing: 10px 0;
-        }
-        
-        td {
-        padding: 10px 15px;
-        background: #C7F6B6;
-        }
+    .boxed {
+    width: 90%;
+    padding: 10px;
+    border: 30px solid #C7F6B6;
+    margin: 0;
+    }
     </style>
     </head>
 
+    <body>
+
     <h2>Based on your desired effects, these are the strains we would recommend!</h2>
 
-    <table>
-        <tr>
-            {% for strain in data %}
-                <th>
-                <li>{{strain.strain_name}}</li>
-                </th>
-            {% endfor %}
-        </tr>
+    {% for strain in data %}
+        <div class="boxed">
+        <h5><u>{{strain.strain_name}}</u></h5>
+        <p><u>Rating:</u> {{strain.strain_rating}}</p>
+        {{strain.strain_description}}
+        <br>
+        <br>
+        <p><u>Strain Type:</u> {{strain.strain_type}}</p>
+        </div>
+    {% endfor %}
 
-        <tr>
-            {% for strain in data %}
-                <td>
-                <li>{{strain.strain_description}}</li>
-                </td>
-            {% endfor %}
-        </tr>
-
-    </table>
-
-
-
+    </body>
 
 {% endblock %}

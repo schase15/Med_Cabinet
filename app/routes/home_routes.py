@@ -5,6 +5,7 @@ from flask import Blueprint, render_template
 # Define home routes
 home_routes = Blueprint("home_routes", __name__)
 
+
 # Home routes
 @home_routes.route("/drop_down_form")
 def index():
@@ -22,10 +23,11 @@ def text():
 
     return render_template('text_recommendation_form.html')
 
+
 @home_routes.route("/")
 def home():
     '''
-    Displays home page, gives instructions to follow nav bar links to recommendation pages
+    Displays home page, gives instructions to navigate website
     '''
 
     return render_template('home_page.html')

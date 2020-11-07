@@ -1,5 +1,4 @@
-  
-<!-- app/templates/text_recommendation_form.html -->
+  <!-- app/templates/text_recommendation_form.html -->
 
 {% extends "bootstrap_layout.html" %}
 
@@ -16,11 +15,12 @@
     </h7>
 
     <form action="/output_text" method="POST">
-
-        <textarea name="message" rows="7" cols="60">Include effects, flavor, strain, anything you can think of! </textarea>
-        <br><br>
-        <input type="submit">
-
+        <fieldset>
+            <textarea name="dict_list" id="dict_list" rows="7" cols="60" style="border: 30px solid #C7F6B6" >Include effects, flavor, strain, anything you can think of! </textarea>
+            <br><br>  
+            <input type="submit">
+        </fieldset>
     </form>
+
 
 {% endblock %}

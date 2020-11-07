@@ -11,8 +11,6 @@ import json
 import pandas as pd
 import pickle
 
-# from sklearn.neighbors import NearestNeighbors
-
 # Register routes
 model_routes = Blueprint("model_routes", __name__)
 
@@ -23,9 +21,8 @@ nn = joblib.load('./app/data/nn02_model.pkl')
 tf = joblib.load('./app/data/tf_01.pkl')
 
 
-### CHANGE THE ROUTE TO MATCH OUR FINAL WEBSITE ARCHITECTURE ###
+# Routes
 @model_routes.route("/strain_output", methods=['GET', 'POST'])
-
 def model_recommender():
 
     """creates list with top n recommended strains. <prod>
@@ -33,35 +30,30 @@ def model_recommender():
         request: dictionary (json object)
             list of user's strain description
         n: int, optional
-            number of recommendations to return, default 3.
+            number of recommendations to return, default 5.
     Returns:
         list_model_id: python list of n recommended strains.
     """
-    
-    type_list = request.form.get("type_list")
-    effect_list = request.form.get("effect_list")
-    flavor_list = request.form.get("flavor_list")	
 
     type_list, effect_list, flavor_list = (
         request.form.getlist("type_list"),
         request.form.getlist("effect_list"),
         request.form.getlist("flavor_list")
     )
-    
-    # MILESTONE 00 # User request
 
     # Convert all to lowercase
     type_list = [type_list.lower() for type_list in type_list]
     effect_list = [effect_list.lower() for effect_list in effect_list]
     flavor_list = [flavor_list.lower() for flavor_list in flavor_list]
 
+    # Combine into 1 list
     request_text = [type_list,
-                    effect_list, 
-                    flavor_list                    
-                ]
-    
+                    effect_list,
+                    flavor_list
+                    ]
+
     # Merges input lists into 1 string
-    result_text = [] 
+    result_text = []
     for sublist in request_text:
         for n in sublist:
             result_text.append(n)
@@ -69,37 +61,30 @@ def model_recommender():
     # Joins into a single string
     result_string = [' '.join(str(n) for n in result_text)]
 
-    # MILESTONE 01 # User request shown as list
-
     # Apply transformer to user input string
     output_strain_dense = tf.transform(result_string)
 
     # Apply model
     _, output_strain_list = nn.kneighbors(output_strain_dense.todense())
 
-
+    # List of strain ids
     list_strains = []
     for points in output_strain_list:
         for index in points:
             list_strains.append(index)
-            
+
+    # Convert to list
     return_list = [
         str(val)
         for val in list_strains
     ]
 
-    # # Query statement for database
-    # records = parse_records(Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all())
-    # df_result = pd.DataFrame(data=records)
-
-    # return render_template('results.html', data=df_result.to_html())
-
-    # To return just the objects
+    # Return objects from database
     records = Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all()
     return render_template('results.html', data=records)
 
 
-# Model route for a text input 
+# Model route for a text input
 @model_routes.route("/output_text", methods=['GET', 'POST'])
 def text_model_recommender():
 
@@ -112,39 +97,29 @@ def text_model_recommender():
     Returns:
         list_model_id: python list of n recommended strains.
     """
-    
-    dict_list = request.form.get("dict_list")
 
+    # Get text input - convert to string
     dict_list = (
         request.form.getlist("dict_list")
     )
-    
-    # MILESTONE 00 #> User request
-
     request_text = [dict_list.lower() for dict_list in dict_list]
-    
-    result_string = [' '.join(str(n) for n in request_text)] # Joins into a single string
+    result_string = [' '.join(str(n) for n in request_text)]
 
-    # MILESTONE 01 #> User request shown as list
-
+    # Apply model
     output_strain_dense = tf.transform(result_string)
     _, output_strain_list = nn.kneighbors(output_strain_dense.todense())
 
+    # Create list to query with
     list_strains = []
     for points in output_strain_list:
         for index in points:
             list_strains.append(index)
-            
+
     return_list = [
         str(val)
         for val in list_strains
     ]
 
-    ## To return a populated dataframe
-    # records = parse_records(Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all())
-    # df_result = pd.DataFrame(data = records)
-    # return render_template('results.html', data= df_result.to_html())
-
-    # To return just the objects
+    # Return objects from DB
     records = Cannabis.query.filter(Cannabis.strain_id.in_(return_list)).all()
     return render_template('results.html', data=records)

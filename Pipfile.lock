@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "da95117a5b30221a1a870c5e354c6e5101ed7690e2d7ac61b8a0d209b3dfa4b5"
+            "sha256": "d84327014b8cd57120c3ddc8ba38ce0579e6fd929127bd1698a40aeb36a000da"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -75,6 +75,14 @@
                 "sha256:f0a4641d3cf955324a89c04f3d94663aa4d638abe8f733ecd3582848e1c37035"
             ],
             "version": "==2.11.2"
+        },
+        "joblib": {
+            "hashes": [
+                "sha256:698c311779f347cf6b7e6b8a39bb682277b8ee4aba8cf9507bc0cf4cd4737b72",
+                "sha256:9e284edd6be6b71883a63c9b7f124738a3c16195513ad940eae7e3438de885d5"
+            ],
+            "index": "pypi",
+            "version": "==0.17.0"
         },
         "mako": {
             "hashes": [

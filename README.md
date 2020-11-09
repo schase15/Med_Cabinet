@@ -11,6 +11,6 @@ The original training data used for this KNN model can be found on [Kaggle](http
 
 The notebook used to build the KNN model can be [here](notebooks/Med_Cabinet_Final.ipynb).
 
-Visit the deployed application [here](TODO).
+Visit the deployed application [here](https://sc-med-cabinet.herokuapp.com/).
 
 Read more on the accompanying blog post [title](TODO).
